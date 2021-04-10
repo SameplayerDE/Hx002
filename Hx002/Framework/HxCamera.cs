@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Hx002.Framework.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Hx002.Framework
@@ -43,7 +44,7 @@ namespace Hx002.Framework
 
         public HxCamera(ProjectionMode projectionMode)
         {
-            //Attach(new HxTransform());
+            Attach(new HxTransform());
             ProjectionMode = projectionMode;
         }
 
@@ -74,8 +75,8 @@ namespace Hx002.Framework
         public void Update(GameTime gameTime)
         {
             UpdateProjection();
-            //Matrix rotationMatrixXZ = Matrix.Multiply(Matrix.CreateRotationX(MathHelper.ToRadians(Transform.Rotation.X)), Matrix.CreateRotationZ(MathHelper.ToRadians(Transform.Rotation.Z)));
-            //Vector3 target = Vector3.Transform(Vector3.Forward, rotationMatrixXZ);
+            Matrix rotationMatrix = Matrix.Multiply(Matrix.CreateRotationX(MathHelper.ToRadians(Get<HxTransform>().Rotation.X)), Matrix.CreateRotationY(MathHelper.ToRadians(Get<HxTransform>().Rotation.Y)));
+            Vector3 target = Vector3.Transform(Vector3.Forward, rotationMatrix);
 
             //DX = Target.X;
             //DY = Target.Y;
@@ -88,7 +89,7 @@ namespace Hx002.Framework
             //BoundingBox.Max = Position + new Vector3(.25f, .25f, .25f);
             //ViewMatrix = Matrix.CreateLookAt(Get<HxTransform>().Position, Forward + Get<HxTransform>().Position, Up);
             
-            ViewMatrix = Matrix.CreateLookAt(Vector3, Vector3.Forward + Vector3, Vector3.Up);
+            ViewMatrix = Matrix.CreateLookAt(Get<HxTransform>().Position, Get<HxTransform>().Position + target, Vector3.Up);
             
         }
     }

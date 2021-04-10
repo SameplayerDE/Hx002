@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Hx002.Framework
@@ -6,29 +7,26 @@ namespace Hx002.Framework
     public class HxObject
     {
 
-        protected Vector3 _vector3;
+        private readonly List<HxComponent> _components = new List<HxComponent>();
 
-        public Vector3 Vector3
+        public void Attach(HxComponent component)
         {
-            get => _vector3;
-            set => _vector3 = value;
+            this._components.Add(component);
         }
-        
-        public Vector2 Vector2
+
+        public T Get<T>() where T : HxComponent
         {
-            get => new Vector2(_vector3.X, _vector3.Y);
-            set
+            foreach (HxComponent component in this._components)
             {
-                _vector3.X = value.X;
-                _vector3.Y = value.Y;
+                if (component is T obj)
+                    return obj;
             }
+            return default (T);
         }
-        
-        public void Add(float x, float y, float z)
+
+        public void Detach(HxComponent component)
         {
-            _vector3.X += x;
-            _vector3.Y += y;
-            _vector3.Z += z;
+            this._components.Remove(component);
         }
         
     }

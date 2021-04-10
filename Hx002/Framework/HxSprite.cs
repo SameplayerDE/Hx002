@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Hx002.Framework.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Hx002.Framework
@@ -21,27 +22,31 @@ namespace Hx002.Framework
             set => _tint = value;
         }
 
-        public HxSprite() {}
-
-        public HxSprite(Vector3 vector3)
+        public HxSprite()
         {
-            _vector3 = vector3;
+            Attach(new HxTransform());
         }
 
-        public HxSprite(Texture2D texture2D)
+        public HxSprite(Vector3 vector3) : this()
+        {
+            Get<HxTransform>().Position = vector3;
+        }
+
+        public HxSprite(Texture2D texture2D) : this()
         {
             _texture2D = texture2D;
         }
 
         public HxSprite(Vector3 vector3, Texture2D texture2D)
         {
-            _vector3 = vector3;
+            Get<HxTransform>().Position = vector3;
             _texture2D = texture2D;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture2D, Vector2, _tint);
+            Vector2 position = new Vector2(Get<HxTransform>().Position.X, Get<HxTransform>().Position.Y);
+            spriteBatch.Draw(_texture2D, position, _tint);
         }
 
     }

@@ -6,6 +6,11 @@ namespace Hx002.Framework
     public class HxGameObject : HxObject
     {
 
+        public HxGameObject()
+        {
+            
+        }
+        
         public virtual void Update(GameTime gameTime) {}
         
     }
