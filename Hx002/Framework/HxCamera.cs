@@ -75,7 +75,9 @@ namespace Hx002.Framework
         public void Update(GameTime gameTime)
         {
             UpdateProjection();
-            Matrix rotationMatrix = Matrix.Multiply(Matrix.CreateRotationX(MathHelper.ToRadians(Get<HxTransform>().Rotation.X)), Matrix.CreateRotationY(MathHelper.ToRadians(Get<HxTransform>().Rotation.Y)));
+            Matrix rotationMatrix = Matrix.CreateRotationX(MathHelper.ToRadians(Get<HxTransform>().Rotation.X)) *
+                                    Matrix.CreateRotationY(MathHelper.ToRadians(Get<HxTransform>().Rotation.Y)) *
+                                    Matrix.CreateRotationZ(MathHelper.ToRadians(Get<HxTransform>().Rotation.Z));
             Vector3 target = Vector3.Transform(Vector3.Forward, rotationMatrix);
 
             //DX = Target.X;
@@ -89,8 +91,8 @@ namespace Hx002.Framework
             //BoundingBox.Max = Position + new Vector3(.25f, .25f, .25f);
             //ViewMatrix = Matrix.CreateLookAt(Get<HxTransform>().Position, Forward + Get<HxTransform>().Position, Up);
             
-            ViewMatrix = Matrix.CreateLookAt(Get<HxTransform>().Position, Get<HxTransform>().Position + target, Vector3.Up);
-            
+            ViewMatrix = Matrix.CreateLookAt(Get<HxTransform>().Position, Get<HxTransform>().Position + target, Vector3.Transform(Vector3.Up, rotationMatrix));
+
         }
     }
 }

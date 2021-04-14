@@ -14,7 +14,7 @@ namespace Hx002.Framework
         {
             for (int i = HxGameObjects.Count - 1; i >= 0; i--)
             {
-                HxGameObjects[i].Update(gameTime);
+                //HxGameObjects[i].Update(gameTime);
             }
         }
 

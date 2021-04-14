@@ -5,9 +5,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Hx002.Framework
 {
-    public class HxMesh : HxObject
+    public class HxMesh : HxGameObject
     {
         private HxMeshData _data = new HxMeshData();
+
+        private int _vertexCount
+        {
+            get { return _data.VertexData.Length; }
+        }
 
         public HxMesh()
         {
@@ -19,7 +24,7 @@ namespace Hx002.Framework
             _data = data;
         }
         
-        public void Add(VertexPositionColor data)
+        public void Add(VertexPositionNormalTexture data)
         {
             _data.Add(data);
         }
@@ -31,6 +36,10 @@ namespace Hx002.Framework
         
         public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix world, Matrix view, Matrix projection)
         {
+            if (_vertexCount < 3)
+            {
+                return;
+            }
             world = Matrix.CreateTranslation(Get<HxTransform>().Position);
             effect.Parameters["WorldViewProjection"].SetValue(world * view * projection);
             
@@ -43,6 +52,10 @@ namespace Hx002.Framework
         
         public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix world, HxCamera hxCamera)
         {
+            if (_vertexCount < 3)
+            {
+                return;
+            }
             world = Matrix.CreateTranslation(Get<HxTransform>().Position);
             effect.Parameters["WorldViewProjection"].SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
             

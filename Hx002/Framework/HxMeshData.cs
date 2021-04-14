@@ -5,18 +5,18 @@ namespace Hx002.Framework
 {
     public class HxMeshData
     {
-        public VertexPositionColor[] VertexData
+        public VertexPositionNormalTexture[] VertexData
         {
             get { return _vertexData.ToArray(); }
         }
-        public List<VertexPositionColor> _vertexData = new List<VertexPositionColor>();
+        public List<VertexPositionNormalTexture> _vertexData = new List<VertexPositionNormalTexture>();
 
         public HxMeshData()
         {
             
         }
 
-        public void Add(VertexPositionColor vertex)
+        public void Add(VertexPositionNormalTexture vertex)
         {
             _vertexData.Add(vertex);
         }

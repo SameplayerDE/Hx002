@@ -2,6 +2,6 @@
 {
     public class HxComponent
     {
-        
+        public HxGameObject HxGameObject;
     }
 }
