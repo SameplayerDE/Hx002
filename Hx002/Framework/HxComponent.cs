@@ -1,7 +1,13 @@
-﻿namespace Hx002.Framework
+﻿using System;
+
+namespace Hx002.Framework
 {
-    public class HxComponent
+    public class HxComponent : ICloneable
     {
         public HxGameObject HxGameObject;
+        public object Clone()
+        {
+            return (HxComponent) this.MemberwiseClone();
+        }
     }
 }

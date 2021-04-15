@@ -34,13 +34,17 @@ namespace Hx002.Framework
             _data.Add(data);
         }
         
-        public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix world, Matrix view, Matrix projection)
+        public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix view, Matrix projection)
         {
             if (_vertexCount < 3)
             {
                 return;
             }
-            world = Matrix.CreateTranslation(Get<HxTransform>().Position);
+            Matrix translationMatrix = Matrix.CreateTranslation(Get<HxTransform>().Position);
+            Matrix rotationMatrix = Matrix.CreateRotationX(MathHelper.ToRadians(Get<HxTransform>().Rotation.X)) *
+                                    Matrix.CreateRotationY(MathHelper.ToRadians(Get<HxTransform>().Rotation.Y)) *
+                                    Matrix.CreateRotationZ(MathHelper.ToRadians(Get<HxTransform>().Rotation.Z));
+            Matrix world = rotationMatrix * translationMatrix;
             effect.Parameters["WorldViewProjection"].SetValue(world * view * projection);
             
             foreach (EffectPass effectPass in effect.CurrentTechnique.Passes)
@@ -50,13 +54,18 @@ namespace Hx002.Framework
             }
         }
         
-        public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix world, HxCamera hxCamera)
+        public void Draw(GraphicsDevice graphicsDevice, Effect effect, HxCamera hxCamera)
         {
             if (_vertexCount < 3)
             {
                 return;
             }
-            world = Matrix.CreateTranslation(Get<HxTransform>().Position);
+
+            Matrix translationMatrix = Matrix.CreateTranslation(Get<HxTransform>().Position);
+            Matrix rotationMatrix = Matrix.CreateRotationX(MathHelper.ToRadians(Get<HxTransform>().Rotation.X)) *
+                                    Matrix.CreateRotationY(MathHelper.ToRadians(Get<HxTransform>().Rotation.Y)) *
+                                    Matrix.CreateRotationZ(MathHelper.ToRadians(Get<HxTransform>().Rotation.Z));
+            Matrix world = rotationMatrix * translationMatrix;
             effect.Parameters["WorldViewProjection"].SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
             
             foreach (EffectPass effectPass in effect.CurrentTechnique.Passes)

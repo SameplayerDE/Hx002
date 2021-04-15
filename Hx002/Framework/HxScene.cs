@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hx002.Framework
 {
@@ -17,24 +18,28 @@ namespace Hx002.Framework
             {
                 foreach (HxComponent component in gameObject.Components)
                 {
-                    if (component is HxBehaviour)
+                    if (component is HxBehaviour behaviour)
                     {
-                        HxBehaviour behaviour = component as HxBehaviour;
                         behaviour.InvokeMethode(behaviour, "Start");
                     }
                 }
             }
         }
         
-        public void Update()
+        public void Update(object sender, EventArgs e)
         {
             foreach (HxGameObject gameObject in GameObjects)
             {
+
+                if (gameObject is HxCamera camera)
+                {
+                    camera.Update(HxTime.GameTime);
+                }
+                
                 foreach (HxComponent component in gameObject.Components)
                 {
-                    if (component is HxBehaviour)
+                    if (component is HxBehaviour behaviour)
                     {
-                        HxBehaviour behaviour = component as HxBehaviour;
                         behaviour.InvokeMethode(behaviour, "Update");
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Hx002.Framework
@@ -24,6 +25,11 @@ namespace Hx002.Framework
         public void Add(HxMeshData data)
         {
             _vertexData.AddRange(data.VertexData);
+        }
+
+        public HxMeshData Clone()
+        {
+            return (HxMeshData) this.MemberwiseClone();
         }
     }
 }

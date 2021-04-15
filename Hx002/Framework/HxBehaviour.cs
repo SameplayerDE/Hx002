@@ -7,7 +7,7 @@ namespace Hx002.Framework
 
         public void InvokeMethode(HxBehaviour self, string methode)
         {
-            self.GetType().GetMethod(methode).Invoke(self, null);
+            self.GetType().GetMethod(methode)?.Invoke(self, null);
         }
     }
 }
