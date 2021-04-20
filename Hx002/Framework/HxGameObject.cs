@@ -12,11 +12,33 @@ namespace Hx002.Framework
         {
             get { return _components; }
         }
-
+        
+        public override object Clone()
+        {
+            var clone = (HxGameObject)base.Clone();
+            clone.Attach(this._components);
+            return clone;
+        }
+        
+        protected override HxObject Create()
+        {
+            return new HxGameObject();
+        }
+        
         public void Attach(HxComponent component)
         {
             component.HxGameObject = this;
             this._components.Add(component);
+        }
+        
+        public void Attach(List<HxComponent> components)
+        {
+            foreach (var component in components)
+            {
+                component.HxGameObject = this;
+                this._components.Add(component);
+            }
+            
         }
 
         public T Get<T>() where T : HxComponent

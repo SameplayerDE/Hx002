@@ -51,6 +51,30 @@ namespace Hx002.Framework.Components
         public void Rotate(Vector3 rotation)
         {
             Rotation += rotation;
+            if (Rotation.X > 180)
+            { 
+                Rotation.X -= 360;
+            }
+            if (Rotation.Y > 360)
+            {
+                Rotation.Y -= 360;
+            }
+            if (Rotation.Z > 360)
+            {
+                Rotation.Z -= 360;
+            }
+            if (Rotation.X < -180)
+            { 
+                Rotation.X += 360;
+            }
+            if (Rotation.Y < 0)
+            {
+                Rotation.Y += 360;
+            }
+            if (Rotation.Z < 0)
+            {
+                Rotation.Z += 360;
+            }
         }
         
         /*public void Rotate(Vector3 rotation, HxSpace space)

@@ -17,6 +17,13 @@ namespace Hx002.Framework
             
         }
 
+        public HxMeshData Copy()
+        {
+            HxMeshData data = new HxMeshData();
+            data.Add(this);
+            return data;
+        }
+
         public void Add(VertexPositionNormalTexture vertex)
         {
             _vertexData.Add(vertex);

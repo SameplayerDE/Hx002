@@ -15,6 +15,66 @@ namespace Hx002.Framework
         public static GamePadState[] CurrentGamepadStates = new GamePadState[4] { GamePad.GetState(0), GamePad.GetState(1), GamePad.GetState(2), GamePad.GetState(3) };
         public static GamePadState[] PreviouseGamepadStates = new GamePadState[4];
 
+        
+        public static float GetAxis(string key)
+        {
+            float result = 0;
+            if (HxCursor.LockMode == HxCursorLockMode.Locked)
+            {
+                SetCursorPosition(Hx.GraphicsDevice.Viewport.Bounds.Center);
+                if (key == "Mouse X")
+                {
+                    result = CurrentMouseState.X - Hx.GraphicsDevice.Viewport.Bounds.Center.X;
+                }
+                else if (key == "Mouse Y")
+                {
+                    result = CurrentMouseState.Y - Hx.GraphicsDevice.Viewport.Bounds.Center.Y;
+                }
+            }
+            else
+            {
+                if (key == "Mouse X")
+                {
+                    result = CurrentMouseState.X - PreviouseMouseState.X;
+                }
+                else if (key == "Mouse Y")
+                {
+                    result = CurrentMouseState.Y - PreviouseMouseState.Y;
+                }
+            }
+
+            if (key == "Horizontal")
+            {
+                bool left, right;
+                left = CurrentKeyboardState.IsKeyDown(Keys.A);
+                right = CurrentKeyboardState.IsKeyDown(Keys.D);
+                if (right)
+                {
+                    result += 1;
+                }
+                if (left)
+                {
+                    result -= 1;
+                }
+            }
+            else if (key == "Vertical")
+            {
+
+                bool up, down;
+                up = CurrentKeyboardState.IsKeyDown(Keys.W);
+                down = CurrentKeyboardState.IsKeyDown(Keys.S);
+                if (up)
+                {
+                    result += 1;
+                }
+                if (down)
+                {
+                    result -= 1;
+                }
+            }
+            return result;
+        }
+        
         public static void Update(GameTime gameTime)
         {
             RefreshStates();
@@ -33,6 +93,11 @@ namespace Hx002.Framework
             {
                 CurrentGamepadStates[i] = GamePad.GetState(i);
             }
+        }
+
+        public static void SetCursorPosition(Point position)
+        {
+            Mouse.SetPosition(position.X, position.Y);
         }
         
         #region Keyboard

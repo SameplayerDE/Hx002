@@ -23,7 +23,20 @@ namespace Hx002.Framework
         {
             _data = data;
         }
+
+
+        public override object Clone()
+        {
+            var clone = (HxMesh)base.Clone();
+            clone._data = this._data;
+            return clone;
+        }
         
+        protected override HxObject Create()
+        {
+            return new HxMesh();
+        }
+
         public void Add(VertexPositionNormalTexture data)
         {
             _data.Add(data);
