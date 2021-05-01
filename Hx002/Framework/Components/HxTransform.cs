@@ -6,7 +6,7 @@ namespace Hx002.Framework.Components
     {
         public Vector3 Position;
         public Vector3 Rotation;
-        public Vector3 Scale;
+        public Vector3 Scale = Vector3.One;
         
         public void Translate(float x, float y, float z)
         {

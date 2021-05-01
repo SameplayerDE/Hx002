@@ -24,7 +24,7 @@ namespace Hx002.Framework.Components
                         Matrix.CreateRotationX(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.X)) *
                         Matrix.CreateRotationY(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Y)) *
                         Matrix.CreateRotationZ(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Z));
-                    Matrix world = rotationMatrix * translationMatrix * Matrix.CreateScale(HxGameObject.Get<HxTransform>().Scale);
+                    Matrix world =  Matrix.CreateScale(HxGameObject.Get<HxTransform>().Scale) * rotationMatrix * translationMatrix;
                     mesh.Effect.Parameters["WorldViewProjection"]
                         .SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
 
