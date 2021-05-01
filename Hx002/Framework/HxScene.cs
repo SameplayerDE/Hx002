@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hx002.Framework.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -50,10 +51,15 @@ namespace Hx002.Framework
         {
             foreach (HxGameObject gameObject in Objects)
             {
-                if (gameObject is HxMesh mesh)
+                if (gameObject.Has<HxMeshRenderer>())
+                {
+                    HxMeshRenderer meshRenderer = gameObject.Get<HxMeshRenderer>();
+                    meshRenderer.Render(Hx.GraphicsDevice, camera);
+                }
+                /*if (gameObject is HxMesh mesh)
                 {
                     mesh.Draw(Hx.GraphicsDevice, effect, camera);
-                }
+                }*/
             }
         }
     }

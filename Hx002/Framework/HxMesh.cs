@@ -7,28 +7,24 @@ namespace Hx002.Framework
 {
     public class HxMesh : HxGameObject
     {
-        private HxMeshData _data = new HxMeshData();
-
-        private int _vertexCount
-        {
-            get { return _data.VertexData.Length; }
-        }
-
-        public HxMesh()
+        public HxMeshData HxMeshData = new HxMeshData();
+        public Effect Effect = null;
+        
+        public HxMesh() 
         {
             Attach(new HxTransform());
         }
 
         public HxMesh(HxMeshData data) : this()
         {
-            _data = data;
+            HxMeshData = data;
         }
 
 
         public override object Clone()
         {
             var clone = (HxMesh)base.Clone();
-            clone._data = this._data;
+            clone.HxMeshData = this.HxMeshData;
             return clone;
         }
         
@@ -39,17 +35,17 @@ namespace Hx002.Framework
 
         public void Add(VertexPositionNormalTexture data)
         {
-            _data.Add(data);
+            HxMeshData.Add(data);
         }
         
         public void Add(HxMeshData data)
         {
-            _data.Add(data);
+            HxMeshData.Add(data);
         }
         
         public void Draw(GraphicsDevice graphicsDevice, Effect effect, Matrix view, Matrix projection)
         {
-            if (_vertexCount < 3)
+            if (HxMeshData.VertexCount < 3)
             {
                 return;
             }
@@ -63,13 +59,13 @@ namespace Hx002.Framework
             foreach (EffectPass effectPass in effect.CurrentTechnique.Passes)
             {
                 effectPass.Apply();
-                graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, _data.VertexData, 0, _data.VertexData.Length / 3);
+                graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, HxMeshData.VertexData, 0, HxMeshData.VertexCount / 3);
             }
         }
         
         public void Draw(GraphicsDevice graphicsDevice, Effect effect, HxCamera hxCamera)
         {
-            if (_vertexCount < 3)
+            if (HxMeshData.VertexCount < 3)
             {
                 return;
             }
@@ -84,7 +80,7 @@ namespace Hx002.Framework
             foreach (EffectPass effectPass in effect.CurrentTechnique.Passes)
             {
                 effectPass.Apply();
-                graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, _data.VertexData, 0, _data.VertexData.Length / 3);
+                graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, HxMeshData.VertexData, 0, HxMeshData.VertexCount / 3);
             }
         }
         

@@ -48,9 +48,21 @@ namespace Hx002.Framework
                 if (component is T obj)
                     return obj;
             }
-            return default (T);
+            return null;
+            //return default (T);
         }
 
+        public bool Has<T>() where T : HxComponent
+        {
+            foreach (HxComponent component in this._components)
+            {
+                if (component is T obj)
+                    return true;
+            }
+            return false;
+            //return default (T);
+        }
+        
         public void Detach(HxComponent component)
         {
             this._components.Remove(component);

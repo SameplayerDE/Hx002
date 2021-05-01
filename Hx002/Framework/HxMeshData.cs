@@ -10,6 +10,12 @@ namespace Hx002.Framework
         {
             get { return _vertexData.ToArray(); }
         }
+
+        public int VertexCount
+        {
+            get { return VertexData.Length; }
+        }
+        
         public List<VertexPositionNormalTexture> _vertexData = new List<VertexPositionNormalTexture>();
 
         public HxMeshData()
