@@ -129,5 +129,40 @@ namespace Hx002.Framework
         }
         #endregion
         
+        #region Gamepad
+
+        public static bool IsButtonDown(PlayerIndex index, Buttons button)
+        {
+            return CurrentGamepadStates[(int) index].IsButtonDown(button);
+        }
+        public static bool IsButtonUp(PlayerIndex index, Buttons button)
+        {
+            return CurrentGamepadStates[(int) index].IsButtonUp(button);
+        }
+        
+        public static bool WasButtonDown(PlayerIndex index, Buttons button)
+        {
+            return PreviouseGamepadStates[(int) index].IsButtonDown(button);
+        }
+        public static bool WasButtonUp(PlayerIndex index, Buttons button)
+        {
+            return PreviouseGamepadStates[(int) index].IsButtonUp(button);
+        }
+        
+        public static bool IsButtonPressed(PlayerIndex index, Buttons button)
+        {
+            return IsButtonDown(index, button) && WasButtonUp(index, button);
+        }
+        public static bool IsButtonReleased(PlayerIndex index, Buttons button)
+        {
+            return IsButtonUp(index, button) && WasButtonDown(index, button);
+        }
+        
+        public static bool IsGamePadConnected(PlayerIndex index)
+        {
+            return CurrentGamepadStates[(int) index].IsConnected;
+        }
+        #endregion
+        
     }
 }
