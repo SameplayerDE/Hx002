@@ -84,7 +84,12 @@ namespace Hx002.Framework
         {
             PreviouseKeyboardState = CurrentKeyboardState;
             PreviouseMouseState = CurrentMouseState;
-            PreviouseGamepadStates = CurrentGamepadStates;
+            //PreviouseGamepadStates = CurrentGamepadStates;
+            
+            for (int i = 0; i < 4; i++)
+            {
+                PreviouseGamepadStates[i] = CurrentGamepadStates[i];
+            }
 
             CurrentKeyboardState = Keyboard.GetState();
             CurrentMouseState = Mouse.GetState();
