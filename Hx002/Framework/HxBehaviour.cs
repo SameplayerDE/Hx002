@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+using System;
+using System.Windows.Forms;
 
 namespace Hx002.Framework
 {
@@ -9,5 +11,11 @@ namespace Hx002.Framework
         {
             self.GetType().GetMethod(methode)?.Invoke(self, null);
         }
+        
+        public void InvokeMethode(HxBehaviour self, string methode, object?[]? parameters)
+        {
+            self.GetType().GetMethod(methode)?.Invoke(self, parameters);
+        }
+
     }
 }
