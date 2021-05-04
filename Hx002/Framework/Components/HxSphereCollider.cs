@@ -11,10 +11,11 @@ namespace Hx002.Framework.Components
 
         public override Vector3 ClosestPoint(Vector3 location)
         {
-            //HxGameObject.Get<HxTransform>().Position + 
-            Vector3 direction = location - (Center);
+            Vector3 objectPosition = HxGameObject.Get<HxTransform>().Position;
+            Vector3 direction = location - (Center + objectPosition);
             direction.Normalize();
-            return Center + (Radius * direction);
+            return (Center + objectPosition) + (direction * Radius);
         }
+
     }
 }
