@@ -59,6 +59,19 @@ namespace Hx002.Framework
             
             foreach (HxGameObject gameObject in Objects)
             {
+                foreach (HxComponent component in gameObject.Components)
+                {
+                    if (component is HxRigidbody rigidbody)
+                    {
+                        rigidbody.Position = gameObject.Get<HxTransform>().Position;
+                        if (rigidbody.UseGravity)
+                        {
+                            rigidbody.Velocity += (HxTime.DeltaTime * Hx.Gravity); // Gravity Pull
+                            rigidbody.Position += HxTime.DeltaTime * rigidbody.Velocity;
+                        }
+                        gameObject.Get<HxTransform>().Position = rigidbody.Position;
+                    }
+                }
                 if (gameObject is HxCamera camera)
                 {
                     camera.Update(HxTime.GameTime);

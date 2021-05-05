@@ -27,6 +27,8 @@ namespace Hx002.Framework.Components
                     Matrix world =  Matrix.CreateScale(HxGameObject.Get<HxTransform>().Scale) * rotationMatrix * translationMatrix;
                     mesh.Effect.Parameters["WorldViewProjection"]
                         .SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
+                    mesh.Effect.Parameters["Color"]
+                        .SetValue(mesh.Color.ToVector4());
 
                     foreach (EffectPass effectPass in mesh.Effect.CurrentTechnique.Passes)
                     {

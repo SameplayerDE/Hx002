@@ -5,19 +5,19 @@ namespace Hx002.Framework.Components
 {
     public class HxRigidbody : HxComponent
     {
-        public float AngularDrag;
+        public float AngularDrag = 0.05f;
         public Vector3 AngularVelocity;
         public Vector3 CenterOfMass;
-        public HxCollisionDetectionMode CollisionDetectionMode;
-        public HxRigidbodyConstraints Constraints;
+        public HxCollisionDetectionMode CollisionDetectionMode = HxCollisionDetectionMode.Discrete;
+        public HxRigidbodyConstraints Constraints = HxRigidbodyConstraints.None;
         public bool DetectCollision;
-        public float Drag;
+        public float Drag = 0f;
         public bool FreezeRotation;
         public Vector3 InertiaTensor;
         public Quaternion InertiaTensorRotation;
-        public HxRigidbodyInterpolation Interpolation;
-        public bool IsKinematic;
-        public float Mass;
+        public HxRigidbodyInterpolation Interpolation = HxRigidbodyInterpolation.None;
+        public bool IsKinematic = false;
+        public float Mass = 1f;
         public float MaxAngularVelocity;
         public float MaxDepenetrationVelocity;
         public Vector3 Position;
@@ -25,7 +25,7 @@ namespace Hx002.Framework.Components
         public float SleepThreshold;
         public int SolverIterations;
         public int SolverVelocityIterations;
-        public bool UseGravity;
+        public bool UseGravity = true;
         public Vector3 Velocity;
         public Vector3 WorldCenterOfMass;
         
