@@ -8,14 +8,14 @@ namespace Hx002.Framework.Components
         public float AngularDrag;
         public Vector3 AngularVelocity;
         public Vector3 CenterOfMass;
-        //public Vector3 CollisionDetectionMode;
-        //public Vector3 Constraints;
+        public HxCollisionDetectionMode CollisionDetectionMode;
+        public HxRigidbodyConstraints Constraints;
         public bool DetectCollision;
         public float Drag;
         public bool FreezeRotation;
         public Vector3 InertiaTensor;
         public Quaternion InertiaTensorRotation;
-        //public Quaternion Interpolation;
+        public HxRigidbodyInterpolation Interpolation;
         public bool IsKinematic;
         public float Mass;
         public float MaxAngularVelocity;
