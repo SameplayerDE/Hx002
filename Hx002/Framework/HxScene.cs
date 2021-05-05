@@ -13,6 +13,8 @@ namespace Hx002.Framework
         //Behaviour
         public List<HxIUpdate> IUpdates = new List<HxIUpdate>();
         public List<HxIStart> IStarts = new List<HxIStart>();
+        //Collision
+        public List<HxIOnCollisionEnter> HxIOnCollisionEnters = new List<HxIOnCollisionEnter>();
 
         public void Add(HxObject hxObject)
         {
@@ -30,6 +32,10 @@ namespace Hx002.Framework
                         if (behaviour is HxIStart iStart)
                         {
                             IStarts.Add(iStart);
+                        }
+                        if (behaviour is HxIOnCollisionEnter iOnCollisionEnter)
+                        {
+                            HxIOnCollisionEnters.Add(iOnCollisionEnter);
                         }
                     }
                 }
