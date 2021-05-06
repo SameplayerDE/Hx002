@@ -2,6 +2,6 @@
 {
     public class HxRenderer : HxComponent
     {
-        
+        public HxMaterial Material;
     }
 }

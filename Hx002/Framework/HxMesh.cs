@@ -8,8 +8,6 @@ namespace Hx002.Framework
     public class HxMesh : HxGameObject
     {
         public HxMeshData HxMeshData = new HxMeshData();
-        public Effect Effect = null;
-        public Color Color = Color.White;
         
         public HxMesh() 
         {

@@ -7,11 +7,17 @@ namespace Hx002.Framework.Components
     {
         public void Render(GraphicsDevice graphicsDevice, HxCamera hxCamera)
         {
+            
+            if (Material == null)
+            {
+                return;
+            }
+            
             if (HxGameObject.Get<HxMeshFilter>() != null)
             {
-                HxMesh mesh = HxGameObject.Get<HxMeshFilter>().HxMesh;
+                HxMesh mesh = HxGameObject.Get<HxMeshFilter>().HxMesh;  
 
-                if (mesh.Effect != null)
+                if (Material.Effect != null)
                 {
 
                     if (mesh.HxMeshData.VertexCount < 3)
@@ -25,18 +31,17 @@ namespace Hx002.Framework.Components
                         Matrix.CreateRotationY(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Y)) *
                         Matrix.CreateRotationZ(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Z));
                     Matrix world =  Matrix.CreateScale(HxGameObject.Get<HxTransform>().Scale) * rotationMatrix * translationMatrix;
-                    mesh.Effect.Parameters["WorldViewProjection"]
+                    Material.Effect.Parameters["WorldViewProjection"]
                         .SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
-                    mesh.Effect.Parameters["Color"]
-                        .SetValue(mesh.Color.ToVector4());
+                    Material.Effect.Parameters["Color"]
+                        .SetValue(Material.Color.ToVector4());
 
-                    foreach (EffectPass effectPass in mesh.Effect.CurrentTechnique.Passes)
+                    foreach (EffectPass effectPass in Material.Effect.CurrentTechnique.Passes)
                     {
                         effectPass.Apply();
                         graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, mesh.HxMeshData.VertexData, 0,
                             mesh.HxMeshData.VertexCount / 3);
                     }
-
                 }
             }
         }

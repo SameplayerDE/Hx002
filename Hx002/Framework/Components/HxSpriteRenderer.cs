@@ -35,7 +35,10 @@ namespace Hx002.Framework.Components
 
         public void Render(GraphicsDevice graphicsDevice, HxCamera hxCamera)
         {
-        
+            if (Material == null)
+            {
+                return;
+            }
             if (Texture2D != null)
             {
                 Matrix translationMatrix = Matrix.CreateTranslation(HxGameObject.Get<HxTransform>().Position);
@@ -44,9 +47,9 @@ namespace Hx002.Framework.Components
                 Matrix.CreateRotationY(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Y)) *
                 Matrix.CreateRotationZ(MathHelper.ToRadians(HxGameObject.Get<HxTransform>().Rotation.Z));
                 Matrix world = rotationMatrix * translationMatrix;
-                _quad.Effect.Parameters["WorldViewProjection"].SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
+                Material.Effect.Parameters["WorldViewProjection"].SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
 
-                foreach (EffectPass effectPass in _quad.Effect.CurrentTechnique.Passes)
+                foreach (EffectPass effectPass in Material.Effect.CurrentTechnique.Passes)
                 {
                     effectPass.Apply();
                     graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, _quad.HxMeshData.VertexData, 0,
