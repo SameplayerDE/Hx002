@@ -5,6 +5,7 @@ namespace Hx002.Framework.Components
     public abstract class HxCollider : HxComponent
     {
 
+        public readonly HxBounds Bounds;
         public bool IsTrigger = false;
         public bool Enabled = true;
         
