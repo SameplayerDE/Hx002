@@ -8,6 +8,9 @@ namespace Hx002.Framework
     {
         public Color Color = Color.White;
         public Texture2D MainTexture;
+        
+        public Vector2 Tiling = new Vector2(1, 1);
+        public Vector2 Offset = new Vector2(0, 0);
 
         public Effect Effect;
 
@@ -20,6 +23,9 @@ namespace Hx002.Framework
         {
             Effect = material.Effect;
             Color = material.Color;
+            MainTexture = material.MainTexture;
+            Tiling = material.Tiling;
+            Offset = material.Offset;
         }
         
         public HxMaterial(HxMaterial material, Color color)

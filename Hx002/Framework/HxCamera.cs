@@ -64,7 +64,7 @@ namespace Hx002.Framework
         {
             if (ProjectionMode == ProjectionMode.Orthographic)
             {
-                ProjectionMatrix = Matrix.CreateOrthographic(MaxX * Size,MaxY * Size, Near, Far);
+                ProjectionMatrix = Matrix.CreateOrthographic(MaxX * (Size / 0.27f),MaxY * (Size / 0.27f), Near, Far);
             }
             if (ProjectionMode == ProjectionMode.Perspective)
             {

@@ -33,6 +33,22 @@ namespace Hx002.Framework.Components
                     Matrix world =  Matrix.CreateScale(HxGameObject.Get<HxTransform>().Scale) * rotationMatrix * translationMatrix;
                     Material.Effect.Parameters["WorldViewProjection"]
                         .SetValue(world * hxCamera.ViewMatrix * hxCamera.ProjectionMatrix);
+                    Material.Effect.Parameters["Texture"]
+                        .SetValue(Material.MainTexture);
+                    Material.Effect.Parameters["Tiling"]
+                        .SetValue(Material.Tiling);
+                    Material.Effect.Parameters["Offset"]
+                        .SetValue(Material.Offset);
+                    if (Material.MainTexture != null)
+                    {
+                        Material.Effect.Parameters["useTexture"]
+                            .SetValue(true);
+                    }
+                    else
+                    {
+                        Material.Effect.Parameters["useTexture"]
+                            .SetValue(false);
+                    }
                     Material.Effect.Parameters["Color"]
                         .SetValue(Material.Color.ToVector4());
 
